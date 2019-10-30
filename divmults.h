@@ -14,10 +14,10 @@ Positive values represent division (so 4 means /4)
 */
 
 
-#define DIVMULT_FACTORY
+//#define DIVMULT_FACTORY
 //#define DIVMULT_PRIME
 //#define DIVMULT_CARNATIC
-//#define DIVMULT_MULTONLY
+#define DIVMULT_MULTONLY
 //#define DIVMULT_FRACTIONALS
 
 

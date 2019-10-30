@@ -36,7 +36,7 @@
 #define HOLDTIMECLEAR 16000
 //100 is 12ms
 //80 is 10ms
-#define MIN_PW 10
+#define MIN_PW 100
 #define SLOW_PERIOD 160
 #define DIV_ADC_DRIFT 2
 #define PW_ADC_DRIFT 3
@@ -58,6 +58,26 @@
  *    DIV MULT      *
  ********************/
 
+//#define P_1 32
+//#define P_2 16
+//#define P_3 8
+//#define P_4 7
+//#define P_5 6
+//#define P_6 5
+//#define P_7 4
+//#define P_8 3
+//#define P_9 2
+//#define P_10 1
+//#define P_11 -2
+//#define P_12 -3
+//#define P_13 -4
+//#define P_14 -5
+//#define P_15 -6
+//#define P_16 -7
+//#define P_17 -8
+//#define P_18 -12
+//#define P_19 -16
+
 #define P_1 1
 #define P_2 -2
 #define P_3 -3
@@ -78,33 +98,8 @@
 #define P_18 -18
 #define P_19 -19
 
-#define oP_1 32
-#define oP_2 16
-#define oP_3 8
-#define oP_4 7
-#define oP_5 6
-#define oP_6 5
-#define oP_7 4
-#define oP_8 3
-#define oP_9 2
-#define oP_10 1
-#define oP_11 -2
-#define oP_12 -3
-#define oP_13 -4
-#define oP_14 -5
-#define oP_15 -6
-#define oP_16 -7
-#define oP_17 -8
-#define oP_18 -12
-#define oP_19 -16
 
-
-const int8_t P_array[4][19] = {
-	{ P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_8, P_9, P_10, P_11, P_12, P_13, P_14, P_15, P_16, P_17, P_18, P_19 },
-	{ P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_8, P_9, P_10, P_11, P_12, P_13, P_14, P_15, P_16, P_17, P_18, P_19 },
-	{ oP_1, oP_2, oP_3, oP_4, oP_5, oP_6, oP_7, oP_8, oP_9, oP_10, oP_11, oP_12, oP_13, oP_14, oP_15, oP_16, oP_17, oP_18, oP_19 },
-	{ oP_1, oP_2, oP_3, oP_4, oP_5, oP_6, oP_7, oP_8, oP_9, oP_10, oP_11, oP_12, oP_13, oP_14, oP_15, oP_16, oP_17, oP_18, oP_19 }};
-
+const int8_t P_array[19] = { P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_8, P_9, P_10, P_11, P_12, P_13, P_14, P_15, P_16, P_17, P_18, P_19 };
 
 uint8_t midpt_array[4][19];
 
@@ -397,11 +392,7 @@ int8_t get_clk_div_nominal(uint8_t chan, uint8_t adc_val){
 	for (i=0;i<19;i++)
 	{
 		if (adc_val<=midpt_array[chan][i])
-			return(P_array[chan][i]);
-	}
-	if (chan>=2)
-	{
-		return(oP_19);
+			return(P_array[i]);
 	}
 	return(P_19);
 }
@@ -686,8 +677,8 @@ int main(void){
 	uint8_t cda[4][19] = {
 		{P_19,P_18,P_17,P_16,P_15,P_14,P_13,P_12,P_11,P_10,P_9,P_8,P_7,P_6,P_5,P_4,P_3,P_2,P_1},
 		{P_19,P_18,P_17,P_16,P_15,P_14,P_13,P_12,P_11,P_10,P_9,P_8,P_7,P_6,P_5,P_4,P_3,P_2,P_1},
-		{oP_19,oP_18,oP_17,oP_16,oP_15,oP_14,oP_13,oP_12,oP_11,oP_10,oP_9,oP_8,oP_7,oP_6,oP_5,oP_4,oP_3,oP_2,oP_1},
-		{oP_19,oP_18,oP_17,oP_16,oP_15,oP_14,oP_13,oP_12,oP_11,oP_10,oP_9,oP_8,oP_7,oP_6,oP_5,oP_4,oP_3,oP_2,oP_1}
+		{P_19,P_18,P_17,P_16,P_15,P_14,P_13,P_12,P_11,P_10,P_9,P_8,P_7,P_6,P_5,P_4,P_3,P_2,P_1},
+		{P_19,P_18,P_17,P_16,P_15,P_14,P_13,P_12,P_11,P_10,P_9,P_8,P_7,P_6,P_5,P_4,P_3,P_2,P_1}
 	};
 	
 
